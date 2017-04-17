@@ -1,9 +1,10 @@
-#!/bin/bash
+#!../../../usr/bin/bash
 echo Installing Docker
 
 read -p "Production install? (y/N): " production
 
 if [[ "$production" == "y" ]]
+then
 	apt-cache madison docker-ce
 	read -p "Version (latest): " version
 fi
@@ -38,6 +39,7 @@ sudo apt-get update
 echo Installing Docker Community Edition
 
 if [[ "$production" == "y" ]]
+then
 	sudo apt-get install docker-ce=$version
 else
 	sudo apt-get install docker-ce
