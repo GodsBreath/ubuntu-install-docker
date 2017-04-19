@@ -1,4 +1,4 @@
-#!/bin/bash
+#!../../../usr/bin/bash
 echo Installing Docker
 
 read -p "Production install? (y/N): " production
