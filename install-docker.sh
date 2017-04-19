@@ -3,11 +3,6 @@ echo Installing Docker
 
 read -p "Production install? (y/N): " production
 
-if [[ "$production" == "y" ]]
-	apt-cache madison docker-ce
-	read -p "Version (latest): " version
-fi
-
 echo Removing Legacy Version
 
 sudo apt-get remove docker docker-engine
@@ -38,11 +33,17 @@ sudo apt-get update
 echo Installing Docker Community Edition
 
 if [[ "$production" == "y" ]]
-	sudo apt-get install docker-ce=$version
-else
-	sudo apt-get install docker-ce
+then
+	apt-cache madison docker-ce
+	read -p "Version (latest): " version
+	if [[ "$version" -ne "" ]]
+	then
+		sudo apt-get install docker-ce=$version
+	else
+		sudo apt-get install docker-ce
+	fi
 fi
-
+	
 echo Running Test Container
 
 sudo docker run hello-world
